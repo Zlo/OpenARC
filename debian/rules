@@ -1,0 +1,32 @@
+#!/usr/bin/make -f
+
+# Force DWARF-4 so debugedit will not complain
+export DEB_CFLAGS_MAINT_APPEND = -gdwarf-4
+# Enable all hardening flags and use the dh sequencer
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+# Tell Python to look in our temporary folder for the miltertest module
+export PYTHONPATH = $(CURDIR)/debian/python_temp
+
+%:
+	dh $@
+
+# Explicitly run autoreconf before configuration
+override_dh_autoreconf:
+	autoreconf -fiv
+
+# Ensure milter support is enabled during the build
+override_dh_auto_configure:
+	dh_auto_configure -- --with-milter --sysconfdir=/etc --localstatedir=/var
+
+override_dh_auto_test:
+	# Create a temporary pip environment just for the test phase
+	mkdir -p $(PYTHONPATH)
+	pip install --target=$(PYTHONPATH) miltertest
+	# Now run the actual tests
+	dh_auto_test
+
+override_dh_auto_install:
+	dh_auto_install --destdir=debian/tmp
+
+override_dh_missing:
+	dh_missing --list-missing

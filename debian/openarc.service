@@ -1,0 +1,17 @@
+[Unit]
+Description=OpenARC Milter
+After=network.target nss-lookup.target
+
+[Service]
+Type=forking
+PIDFile=/run/openarc/openarc.pid
+EnvironmentFile=-/etc/default/openarc
+ExecStart=/usr/sbin/openarc -p local:/run/openarc/openarc.sock -P /run/openarc/openarc.pid $OPTIONS
+Restart=on-failure
+User=openarc
+Group=openarc
+RuntimeDirectory=openarc
+RuntimeDirectoryMode=0750
+
+[Install]
+WantedBy=multi-user.target

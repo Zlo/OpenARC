@@ -1,0 +1,9 @@
+usr/include/openarc/arc.h
+usr/lib/*/libopenarc.so
+usr/lib/*/libopenarc.la
+usr/lib/*/libopenarc.a
+usr/share/doc/openarc/openarc
+usr/share/doc/openarc/openarc.service
+usr/share/doc/openarc/openarc.spec.in
+usr/share/doc/openarc/openarc.xml
+usr/share/doc/openarc/openarc.conf.sample

@@ -1,0 +1,15 @@
+# Autotools noise
+Makefile.in
+aclocal.m4
+compile
+config.guess
+config.h.in
+config.sub
+configure
+depcomp
+install-sh
+ltmain.sh
+missing
+# Python test noise
+debian/python_temp/
+.pytest_cache/

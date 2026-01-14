@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "purge" ]; then
+    # Optional: Remove the system user on purge
+    # deluser --system openarc || true
+    rm -rf /var/lib/openarc
+    rm -rf /run/openarc
+fi
+
+#DEBHELPER#
+
+exit 0
